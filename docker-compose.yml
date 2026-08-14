@@ -1,0 +1,8 @@
+services:
+  web:
+    build: ./app
+    container_name: devops-compose-app
+    ports: 
+    - "8080:80"
+    volumes:
+    - "./app:/usr/share/nginx/html"
