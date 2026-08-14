@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches:  [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+     - name: Checkout code
+       uses: actions/checkout@v4
+
+     - name: Build Docker image
+       run: docker build -t cloud-native-app:ci ./app
+
+     - name: Start Container
+       run: docker run -d --name smoke -p 8080:80 cloud-native-app:ci
+
+     - name: Smoke test with curl
+       run: curl --fail http://localhost:8080
+       
