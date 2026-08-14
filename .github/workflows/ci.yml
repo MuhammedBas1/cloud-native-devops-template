@@ -21,5 +21,5 @@ jobs:
        run: docker run -d --name smoke -p 8080:80 cloud-native-app:ci
 
      - name: Smoke test with curl
-       run: run: curl --fail --retry 5 --retry-connrefused --retry-delay 2 http://localhost:8080
+       run:  curl --fail --retry 5 --retry-connrefused --retry-delay 2 http://localhost:8080
        
