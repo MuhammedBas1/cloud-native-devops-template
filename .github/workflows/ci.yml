@@ -20,6 +20,25 @@ jobs:
      - name: Start Container
        run: docker run -d --name smoke -p 8080:80 cloud-native-app:ci
 
+     - name: Show container status
+       run: docker ps -a
+
+     - name: Show container logs
+       run: docker logs smoke
+
      - name: Smoke test with curl
        run:  curl --fail --retry 5 --retry-connrefused --retry-delay 2 http://localhost:8080
        
+localstack:
+    image: localstack/localstack:latest
+    container_name: localstack
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3,ec2,iam
+      - DEFAULT_REGION=eu-central-1
+    volumes:
+      - localstack-data:/var/lib/localstack
+
+volumes:
+  localstack-data:

@@ -6,3 +6,17 @@ services:
     - "8080:80"
     volumes:
     - "./app:/usr/share/nginx/html"
+
+  localstack:
+    image: localstack/localstack:4.0
+    container_name: localstack
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3,ec2,iam
+      - DEFAULT_REGION=eu-central-1
+    volumes:
+      - localstack-data:/var/lib/localstack
+
+volumes:
+  localstack-data:
