@@ -42,7 +42,7 @@ resource "aws_security_group" "web" {
 //    security_group_id = aws_security_group.web.id
 //    cidr_blocks = ["0.0.0.0/0"]
 //    from_port = 22
-//    protocol = "ssh"
+//    protocol = "tcp"
 //    to_port = 22
 //}
 
@@ -52,6 +52,7 @@ resource "aws_instance" "web" {
     subnet_id = aws_subnet.public.id
     vpc_security_group_ids = [aws_security_group.web.id]
     associate_public_ip_address = true
+    iam_instance_profile = aws_iam_instance_profile.web_profile.name
     user_data = <<-EOF
     #!/bin/bash
         yum update -y
@@ -59,4 +60,3 @@ resource "aws_instance" "web" {
         systemctl start nginx
     EOF
 }
-
