@@ -1,7 +1,7 @@
 resource "aws_security_group" "web" {
     name = "web"
-    description = "Allow HTTP and SSH inbound traffic"
-    vpc_id = aws_subnet.public.id
+    description = "Allowed Inbound HTTP and SSH traffic for the Web instance"
+    vpc_id = aws_vpc.main.id
 
     tags = {
         Name = "web"
@@ -9,33 +9,53 @@ resource "aws_security_group" "web" {
 
 
     ingress {
-        cidr_blocks = ["0.0.0.0/0"]
-        from_port = 80
-        protocol = "tcp"
-        to_port = 80
+        cidr_blocks = [aws_security_group.alb.id]
+        to_port     = 80
+        from_port   = 80
+        protocol    = "tcp"
     }
 
     ingress {
         cidr_blocks = ["0.0.0.0/0"]
-        from_port = 22
-        protocol = "tcp"
-        to_port = 22
+        to_port     = 22
+        from_port   = 22
+        protocol    = "tcp"
     }
 
     egress {
-        from_port   = 0
-        to_port     = 0
         cidr_blocks = ["0.0.0.0/0"]
-        protocol = "-1"
+        to_port     = 0
+        from_port   = 0
+        protocol    = "-1"
+    }
+}
+
+resource "aws_seucrity_group" "alb" {
+    name "alb"
+    description "Allowed inbound HTTP traffic for the ALB"
+    vpc_id = aws_vpc.main.id
+
+    ingress {
+        cidr_blocks = ["0.0.0.0/0"]
+        to_port     = 22
+        from_port   = 22
+        protocol    = "tcp"
+    }
+    
+    egress {
+        cidr_blocks = ["0.0.0.0/0"]
+        to_port     = 0
+        from_port   = 0
+        protocol    "-1"
     }
 }
 
 //resource "aws_vpc_security_group_ingress_rule" "allow_http_ipv4" {
 //    security_group_id = aws_security_group.web.id
-//    cidr_blocks = ["0.0.0.0/0"]
-//    from_port = 80
-//    protocol = "tcp"
-//    to_port = 80
+//    cidr_blocks       = ["0.0.0.0/0"]
+//    from_port         = 80
+//    protocol          = "tcp"
+//    to_port           = 80
 //}
 
 //resource "aws_vpc_security_group_ingress_rule" "allow_ssh_ipv4 {
