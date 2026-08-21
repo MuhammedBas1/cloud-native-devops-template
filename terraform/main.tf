@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "aws" {
-    access_key = "test"
+  access_key = "test"
   secret_key = "test"
   region     = "eu-central-1"
 
@@ -20,6 +20,9 @@ provider "aws" {
   endpoints {
     s3  = "http://localhost:4566"
     ec2 = "http://localhost:4566"
+    //rds = "http://localhost:4566"
+    dynamodb = "http://localhost:4566"
+    iam = "http://localhost:4566"
   }
 }
 

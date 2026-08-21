@@ -1,0 +1,6 @@
+.terraform/
+.terraform.*
+terraform.*
+TERRAFORM_CHEATSHEET.md
+.terraform.lock.hcl
+STUDY_GUIDE.md
