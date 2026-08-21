@@ -9,7 +9,7 @@ resource "aws_security_group" "web" {
 
 
     ingress {
-        cidr_blocks = [aws_security_group.alb.id]
+        cidr_blocks = [aws_security_group.alb_sg.id]
         to_port     = 80
         from_port   = 80
         protocol    = "tcp"
@@ -30,8 +30,8 @@ resource "aws_security_group" "web" {
     }
 }
 
-resource "aws_seucrity_group" "alb" {
-    name "alb"
+resource "aws_seucrity_group" "alb_sg" {
+    name "alb-security-group"
     description "Allowed inbound HTTP traffic for the ALB"
     vpc_id = aws_vpc.main.id
 
