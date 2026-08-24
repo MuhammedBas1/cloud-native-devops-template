@@ -1,10 +1,10 @@
 terraform {
-    required_providers {
-        aws = {
-            source = "hashicorp/aws"
-            version = "~> 5.0"
-        }
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
     }
+  }
 }
 
 provider "aws" {
@@ -22,7 +22,7 @@ provider "aws" {
     ec2 = "http://localhost:4566"
     //rds = "http://localhost:4566"
     dynamodb = "http://localhost:4566"
-    iam = "http://localhost:4566"
+    iam      = "http://localhost:4566"
   }
 }
 
