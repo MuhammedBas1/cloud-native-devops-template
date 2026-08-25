@@ -4,20 +4,22 @@ A hands-on portfolio project demonstrating a complete, modern DevOps workflow:
 a containerized application, automated CI/CD, and Infrastructure as Code
 
 ## Architecture Diagram
-Internet ──┐
-           │
-           ▼
-           ┌─────────────────────────────────────────┐
-           │       Application Load Balancer         │
-           │         (Public Subnet A + B)           │
-           └──────────────────┬──────────────────────┘
-                              │
-        ┌──────────┴──────────┬─────────────────────┐
-        ▼                     ▼                     ▼
-┌───────────────┐     ┌───────────────┐     ┌───────────────┐
-│   ASG EC2-1   │     │   ASG EC2-2   │     │   DynamoDB    │
-│  (Subnet A)   │     │  (Subnet B)   │     │  (Private)    │
-└───────────────┘     └───────────────┘     └───────────────┘
+Internet ───┐
+            │
+            ▼
+┌───────────────────────────────────────┐
+│                                       │
+│       Application Load Balancer       │
+│         (Public Subnet A + B)         │
+│                                       │
+└───────────────────┬───────────────────┘
+                    │
+      ┌─────────────┼─────────────┐
+      ▼             ▼             ▼
+┌───────────┐ ┌───────────┐ ───────────┐
+│ ASG EC2-1 │ │ ASG EC2-2 │ │ DynamoDB  │
+│ (Subnet A)│ │ (Subnet B)│ │ (Private) │
+└───────────┘ └───────────┘ └───────────┘
 
 ## Repository Structure
 
