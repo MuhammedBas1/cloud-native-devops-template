@@ -4,6 +4,7 @@ A hands-on portfolio project demonstrating a complete, modern DevOps workflow:
 a containerized application, automated CI/CD, and Infrastructure as Code
 
 ## Architecture Diagram
+```text
 Internet ───┐
             │
             ▼
@@ -20,7 +21,7 @@ Internet ───┐
 │ ASG EC2-1 │ │ ASG EC2-2 │ │ DynamoDB  │
 │ (Subnet A)│ │ (Subnet B)│ │ (Private) │
 └───────────┘ └───────────┘ └───────────┘
-
+```
 ## Repository Structure
 
     cloud-native-devops-template/
