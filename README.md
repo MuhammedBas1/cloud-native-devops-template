@@ -69,3 +69,9 @@ On every **push to `master`** and every **pull request**, GitHub Actions:
 ## Infrastructure as Code (IaC)
 
 Terraform creates a virtual private cloud, within that VPC there are three subnets - of which two are public and one is private. The ASG and ALB span across the two subnets in different availability zones in order to simulate high availability. The EC2-instances which are created through the ASG using the launch template drop every type of traffic not being forwarded from the ALB with the help of pre defined security groups. Additionally, the Auto Scaling Group automatically registers newly launched EC2 instances with the ALB Target Group and deregisters them upon termination. The ALB then actively performs health checks with an interval of 30 seconds. 
+
+
+## LocalStack Limitations & Production Readiness
+This repository uses LocalStack for local AWS emulation. Please note:
+RDS/Databases: LocalStack's RDS emulation is limited. Therefore, database resources are omitted from this local setup to keep the CI pipeline fast and stable. However, the VPC and Subnet architecture is designed to easily accommodate a private RDS instance in a real AWS environment.
+ASG Health Checks: LocalStack does not emulate real EC2 instances, so ASG auto-healing based on ALB health checks cannot be fully tested locally. The Terraform code, however, is 1:1 production-ready for real AWS.
